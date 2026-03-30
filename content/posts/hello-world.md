@@ -13,12 +13,12 @@ summary: "这是我的第一篇博客文章，记录了搭建这个技术博客�
 
 ## 这个博客是怎么搭建的
 
-这个博客使用 [Hugo](https://gohugo.io/) 构建，主题是 [Hextra](https://github.com/imfing/hextra)，部署在 GitHub Pages 上。
+这个博客使用 [Hugo](https://gohugo.io/) 构建，主题是 [PaperMod](https://github.com/adityatelange/hugo-PaperMod)，部署在 GitHub Pages 上。
 
 整个技术栈的选择理由：
 
 - **Hugo**：构建速度极快，Go 模板灵活，社区活跃
-- **Hextra**：文档风格布局，内置搜索、暗色模式、代码高亮
+- **PaperMod**：简洁干净，代码高亮优秀，暗色模式开箱即用
 - **GitHub Pages**：免费托管，与 Git 工作流天然集成
 
 ## 一段示例代码

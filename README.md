@@ -1,6 +1,6 @@
 # KeenJoe's Blog
 
-基于 [Hugo](https://gohugo.io/) + [Hextra](https://github.com/imfing/hextra) 构建的个人技术博客，部署在 GitHub Pages。
+基于 [Hugo](https://gohugo.io/) + [PaperMod](https://github.com/adityatelange/hugo-PaperMod) 构建的个人技术博客，部署在 GitHub Pages。
 
 ## 本地开发
 
@@ -8,8 +8,8 @@
 # 安装 Hugo（macOS）
 brew install hugo
 
-# 克隆仓库
-git clone https://github.com/keenJoe/keenJoe.github.io.git
+# 克隆仓库（含主题子模块）
+git clone --recursive https://github.com/keenJoe/keenJoe.github.io.git
 cd keenJoe.github.io
 
 # 本地预览
@@ -21,13 +21,11 @@ hugo --minify
 
 ## 写新文章
 
-在 `content/blog/` 目录下创建 Markdown 文件：
-
 ```bash
-hugo new content/blog/my-new-post.md
+hugo new posts/my-new-post.md
 ```
 
-编辑文章内容，将 `draft: true` 改为 `draft: false` 后推送即可发布。
+然后编辑 `content/posts/my-new-post.md`，将 `draft: true` 改为 `draft: false` 后推送即可发布。
 
 ## 部署
 
