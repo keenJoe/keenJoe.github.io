@@ -32,6 +32,7 @@ disableScrollToTop = false
 hidemeta = false
 hideSummary = false
 showtoc = true
+mainSections = ["posts", "claude-code"]
 
   [params.homeInfoParams]
   Title = "Hey, I'm KeenJoe"
@@ -54,6 +55,12 @@ identifier = "home"
 name = "首页"
 url = "/"
 weight = 1
+
+[[menu.main]]
+identifier = "claude-code"
+name = "Claude Code"
+url = "/claude-code/"
+weight = 3
 
 [[menu.main]]
 identifier = "archives"
