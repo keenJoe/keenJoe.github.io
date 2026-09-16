@@ -16,14 +16,83 @@ body {
   line-height: 1.8em;
 }
 
+/* --- Headings: bmpi `h1,h2,h3,h4,h5,h6` rule, verbatim ---
+   `font-weight: 700` on LXGW WenKai (which only ships regular) means the
+   browser synthesizes bold, same as bmpi. Sizes come from bmpi's own heading
+   rules in `rem`, resolved against its `html { font-size: 62.5% }` base. */
 h1,
 h2,
 h3,
 h4,
 h5,
 h6 {
-  font-family: 'LXGW WenKai', -apple-system, BlinkMacSystemFont, Roboto,
-    "Segoe UI", "PingFang SC", "Microsoft YaHei", "Songti SC", SimSun, sans-serif;
+  font-family: 'LXGW WenKai', Roboto, "Palatino Linotype", "Book Antiqua",
+    Palatino, Helvetica, STKaiti, SimSun, serif;
+  font-weight: 700;
+  color: #666;
+}
+
+h1 {
+  font-size: 30px;
+  line-height: 3.6rem;
+}
+
+h2 {
+  font-size: 26px;
+  line-height: 3.2rem;
+}
+
+h3 {
+  font-size: 22px;
+  line-height: 2.8rem;
+}
+
+h4 {
+  font-size: 18px;
+  line-height: 2.6rem;
+}
+
+h5 {
+  font-size: 14px;
+  line-height: 2.4rem;
+}
+
+h6 {
+  font-size: 14px;
+  line-height: 2.2rem;
+}
+
+/* bmpi's mobile step-down for headings */
+@media only screen and (max-width: 768px) {
+  h1 {
+    font-size: 24px;
+    line-height: 3.4rem;
+  }
+
+  h2 {
+    font-size: 20px;
+    line-height: 3rem;
+  }
+
+  h3 {
+    font-size: 16px;
+    line-height: 2.6rem;
+  }
+
+  h4 {
+    font-size: 12px;
+    line-height: 2.4rem;
+  }
+
+  h5 {
+    font-size: 8px;
+    line-height: 2.2rem;
+  }
+
+  h6 {
+    font-size: 6px;
+    line-height: 2rem;
+  }
 }
 
 /* --- H1: tri-color gradient clipping (bmpi `article h1`) --- */
@@ -52,8 +121,9 @@ h6 {
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
 }
 
-/* --- CJK readability: line-height + spacing (bmpi main.css) --- */
+/* --- CJK body copy (bmpi .article-content: 20px / 1.8 / LXGW WenKai) --- */
 .post-content {
+  font-size: 20px;
   line-height: 1.8;
   letter-spacing: 0.5px;
   overflow-wrap: break-word;
@@ -136,25 +206,49 @@ h6 {
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 }
 
-/* --- Homepage: left-aligned intro + lighter list titles (bmpi .list .title) --- */
+/* --- Homepage + section lists: bmpi `.list ul li .title` is 24px, LXGW
+   WenKai, and overridden to font-weight 100 / 18px color #428bca by bmpi's
+   main.css (which loads last). .post-entry .entry-header h2 at 24px matches. --- */
 .home-info {
   text-align: left;
 }
 
-.home-info .entry-header h1,
-.list .title,
-.post-entry .entry-header h2 {
-  font-family: 'LXGW WenKai', -apple-system, BlinkMacSystemFont, Roboto,
-    "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+.post-entry .entry-header h2,
+.list .title {
+  font-family: 'LXGW WenKai', Roboto, "Palatino Linotype", "Book Antiqua",
+    Palatino, Helvetica, STKaiti, SimSun, serif;
+  font-weight: 100;
+  color: #428bca;
 }
 
-.home-info .entry-header h1,
-.post-entry .entry-header h2 {
+.home-info .entry-header h1 {
+  font-family: 'LXGW WenKai', Roboto, "Palatino Linotype", "Book Antiqua",
+    Palatino, Helvetica, STKaiti, SimSun, serif;
   font-weight: 100;
+}
+
+.list .title a {
+  color: #428bca;
 }
 
 .home-info .entry-footer {
   text-align: left;
+}
+
+/* --- Header nav + footer: bmpi sets these to LXGW WenKai 700 / #212121 --- */
+.nav .logo a,
+.nav .logo span,
+.nav .menu a {
+  font-family: 'LXGW WenKai', Roboto, "Palatino Linotype", "Book Antiqua",
+    Palatino, Helvetica, STKaiti, SimSun, serif;
+  font-weight: 700;
+}
+
+.footer,
+.footer a {
+  font-family: 'LXGW WenKai', Roboto, "Palatino Linotype", "Book Antiqua",
+    Palatino, Helvetica, STKaiti, SimSun, serif;
+  font-weight: 300;
 }
 
 /* --- Dark mode: PaperMod sets data-theme="dark" explicitly, or applies the
@@ -169,6 +263,22 @@ h6 {
 }
 
 :root[data-theme="dark"] .post-content a:not(.anchor) {
+  color: #6aa9d6;
+}
+
+/* #666 headings, and bmpi's brownish list-link blue, both sink into a dark ground. */
+:root[data-theme="dark"] h1,
+:root[data-theme="dark"] h2,
+:root[data-theme="dark"] h3,
+:root[data-theme="dark"] h4,
+:root[data-theme="dark"] h5,
+:root[data-theme="dark"] h6 {
+  color: var(--secondary);
+}
+
+:root[data-theme="dark"] .post-entry .entry-header h2,
+:root[data-theme="dark"] .list .title,
+:root[data-theme="dark"] .list .title a {
   color: #6aa9d6;
 }
 
@@ -190,6 +300,21 @@ h6 {
   }
 
   :root:not([data-theme="light"]) .post-content a:not(.anchor) {
+    color: #6aa9d6;
+  }
+
+  :root:not([data-theme="light"]) h1,
+  :root:not([data-theme="light"]) h2,
+  :root:not([data-theme="light"]) h3,
+  :root:not([data-theme="light"]) h4,
+  :root:not([data-theme="light"]) h5,
+  :root:not([data-theme="light"]) h6 {
+    color: var(--secondary);
+  }
+
+  :root:not([data-theme="light"]) .post-entry .entry-header h2,
+  :root:not([data-theme="light"]) .list .title,
+  :root:not([data-theme="light"]) .list .title a {
     color: #6aa9d6;
   }
 
