@@ -1,0 +1,219 @@
+/* bmpi.dev-style reading overrides for PaperMod
+   Source reference: bmpi.dev = Hugo Coder + LXGW WenKai + Heti + custom main.css
+   Covers: site-wide LXGW WenKai, gradient H1, framed article card,
+   muted gray headings with H2 underline, link color, inline-code highlight,
+   CJK line-height/letter-spacing, full-width soft-border tables.
+   Uses PaperMod CSS vars so dark mode (data-theme="dark") adapts automatically.
+   The four hardcoded colors (gradient, link blue, inline-code yellow, card
+   shadow) are redefined under [data-theme="dark"] further down. */
+
+/* --- Font: LXGW WenKai for CJK, system fallback for Latin (bmpi body rule) --- */
+body {
+  font-family: 'LXGW WenKai', -apple-system, BlinkMacSystemFont, Roboto,
+    "Segoe UI", "PingFang SC", "Microsoft YaHei", "Songti SC", SimSun, sans-serif;
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 1.8em;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'LXGW WenKai', -apple-system, BlinkMacSystemFont, Roboto,
+    "Segoe UI", "PingFang SC", "Microsoft YaHei", "Songti SC", SimSun, sans-serif;
+}
+
+/* --- H1: tri-color gradient clipping (bmpi `article h1`) --- */
+.post-title {
+  background: linear-gradient(45deg, #e5b751, #1677b3, #cc5595 80%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  /* fallback for browsers without background-clip: text */
+  color: #1677b3;
+}
+
+/* --- Article card: border + generous padding + drop shadow (bmpi .article-content) ---
+   PaperMod caps .main at --main-width + 2*--gap (768px). Break the card out to
+   820px via negative margin so the frame isn't cramped by the 720px text column. */
+.main:has(> .post-single) {
+  max-width: calc(820px + var(--gap) * 2);
+}
+
+.post-single {
+  border: 1px solid var(--tertiary);
+  border-radius: 4px;
+  padding: 40px;
+  margin-inline: calc(var(--gap) * -1);
+  background: var(--entry);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+}
+
+/* --- CJK readability: line-height + spacing (bmpi main.css) --- */
+.post-content {
+  line-height: 1.8;
+  letter-spacing: 0.5px;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+.post-content p {
+  margin: 1.2em 0;
+}
+
+/* --- Headings: muted gray, H2 with bottom border (bmpi main.css) --- */
+.post-content h2 {
+  margin-bottom: 20px;
+  padding: 5px 0;
+  border-bottom: 1px solid var(--tertiary);
+  line-height: 1.5;
+  color: var(--secondary);
+}
+
+.post-content h3,
+.post-content h4,
+.post-content h5,
+.post-content h6 {
+  color: var(--secondary);
+  line-height: 1.5;
+}
+
+/* --- Links: bmpi link blue --- */
+.post-content a:not(.anchor) {
+  color: #428bca;
+}
+
+.post-content a:not(.anchor):hover {
+  text-decoration: underline;
+}
+
+/* --- Inline code: bmpi yellow highlight (pre code stays on the dark block) --- */
+.post-content code:not(pre code) {
+  background-color: rgba(255, 247, 0, 0.88);
+  color: #212121;
+  padding: 0.2rem 0.4rem;
+  border-radius: 3px;
+}
+
+.post-content a code:not(pre code) {
+  box-shadow: none;
+}
+
+/* --- Blockquote: flat tinted panel, no italics (bmpi .heti blockquote) --- */
+.post-content blockquote {
+  background-color: var(--code-bg);
+  border-inline-start: 4px solid var(--tertiary);
+  border-radius: 0 4px 4px 0;
+  font-style: normal;
+}
+
+/* --- Tables: full width + soft borders (bmpi main.css) --- */
+.post-content table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1.2em 0;
+  display: block;
+  overflow-x: auto;
+}
+
+.post-content th,
+.post-content td {
+  text-align: left;
+  padding: 8px;
+  border: 1px solid var(--border);
+}
+
+.post-content thead th {
+  color: var(--secondary);
+}
+
+/* --- Code stays monospace; don't let LXGW touch it --- */
+.post-content code,
+.post-content pre {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+/* --- Homepage: left-aligned intro + lighter list titles (bmpi .list .title) --- */
+.home-info {
+  text-align: left;
+}
+
+.home-info .entry-header h1,
+.list .title,
+.post-entry .entry-header h2 {
+  font-family: 'LXGW WenKai', -apple-system, BlinkMacSystemFont, Roboto,
+    "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+
+.home-info .entry-header h1,
+.post-entry .entry-header h2 {
+  font-weight: 100;
+}
+
+.home-info .entry-footer {
+  text-align: left;
+}
+
+/* --- Dark mode: PaperMod sets data-theme="dark" explicitly, or applies the
+   same vars inside @media (prefers-color-scheme: dark) in head.html. Both
+   paths are covered below. --- */
+
+/* Gradient + link blue need brightening on a dark ground, or they disappear. */
+:root[data-theme="dark"] .post-title {
+  background: linear-gradient(45deg, #e5b751, #4a9fd8, #e07ab5 80%);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+:root[data-theme="dark"] .post-content a:not(.anchor) {
+  color: #6aa9d6;
+}
+
+/* Solid yellow at full opacity is glaring on dark; use a warm tint. */
+:root[data-theme="dark"] .post-content code:not(pre code) {
+  background-color: rgba(229, 183, 81, 0.22);
+  color: #f0d9a0;
+}
+
+:root[data-theme="dark"] .post-single {
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .post-title {
+    background: linear-gradient(45deg, #e5b751, #4a9fd8, #e07ab5 80%);
+    -webkit-background-clip: text;
+    background-clip: text;
+  }
+
+  :root:not([data-theme="light"]) .post-content a:not(.anchor) {
+    color: #6aa9d6;
+  }
+
+  :root:not([data-theme="light"]) .post-content code:not(pre code) {
+    background-color: rgba(229, 183, 81, 0.22);
+    color: #f0d9a0;
+  }
+
+  :root:not([data-theme="light"]) .post-single {
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
+  }
+}
+
+/* --- Narrow screens: drop the frame so the text column keeps its width --- */
+@media (max-width: 768px) {
+  .main:has(> .post-single) {
+    max-width: none;
+  }
+
+  .post-single {
+    border: none;
+    border-radius: 0;
+    padding: 0;
+    margin-inline: 0;
+    box-shadow: none;
+  }
+}
